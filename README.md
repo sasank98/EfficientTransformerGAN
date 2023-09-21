@@ -2,6 +2,8 @@
 
 ## Overview
 
+Changed the Generator architecture from ResNet to ETGAN the difference can be seen in the model architectures in figure directory also check the models.ipynb file for implementation to visualize the graphs. Changed the train_net and train_gan files to implement ETGAN as their generator model. the following commands should still work. Please note that the test.py and inference.py file were not changed yet so they will still have the old generator
+
 This repository contains an op-for-op PyTorch reimplementation
 of [Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network](https://arxiv.org/abs/1609.04802v5).
 
