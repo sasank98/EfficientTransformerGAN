@@ -22,6 +22,8 @@ import yaml
 from torch import nn
 from torch.utils.data import DataLoader
 
+from models.models import ETGAN
+
 import model
 from dataset import CUDAPrefetcher, PairedImageDataset, CPUPrefetcher
 from imgproc import tensor_to_image
@@ -49,10 +51,12 @@ def load_dataset(config: Any, device: torch.device):
 
 
 def build_model(config: Any, device: torch.device):
-    g_model = model.__dict__[config["MODEL"]["G"]["NAME"]](in_channels=config["MODEL"]["G"]["IN_CHANNELS"],
-                                                           out_channels=config["MODEL"]["G"]["OUT_CHANNELS"],
-                                                           channels=config["MODEL"]["G"]["CHANNELS"],
-                                                           num_rcb=config["MODEL"]["G"]["NUM_RCB"])
+    # g_model = model.__dict__[config["MODEL"]["G"]["NAME"]](in_channels=config["MODEL"]["G"]["IN_CHANNELS"],
+    #                                                        out_channels=config["MODEL"]["G"]["OUT_CHANNELS"],
+    #                                                        channels=config["MODEL"]["G"]["CHANNELS"],
+    #                                                        num_rcb=config["MODEL"]["G"]["NUM_RCB"])
+    
+    g_model = ETGAN(mlpDim=128,scaleFactor=config["SCALE"])
     g_model = g_model.to(device)
 
     # compile model
