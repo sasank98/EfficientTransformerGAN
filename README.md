@@ -1,13 +1,32 @@
-# SRGAN-PyTorch
+# Efficient Transformer GAN
+Team members: Ajaysriram Muthuraman & Sasank Potluri
+Travel Dates: 01
 
 ## Overview
 
 Changed the Generator architecture from ResNet to ETGAN the difference can be seen in the model architectures in figure directory also check the models.ipynb file for implementation to visualize the graphs. Changed the train_net and train_gan files to implement ETGAN as their generator model. the following commands should still work. Please note that the test.py and inference.py file were not changed yet so they will still have the old generator
 
-This repository contains an op-for-op PyTorch reimplementation
-of [Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network](https://arxiv.org/abs/1609.04802v5).
+Implemented a Transformer based architecture for the task of Super-Resolution, used HFM modules to process high frequency information and low frequency information seperately.
 
-## Table of contents
+Implemented two paths in the neural network one for understanding the scene of the image and other to add minor details to each feature
+
+Below is the architecture of SRGAN implementation
+
+<span align="center"><img width="240" height="360" src="figure/SrGAN_model.svg"/></span>
+
+Below is the architecture of ESRT implementation based on which our model is hugely based on
+
+<span align="center"><img width="240" height="360" src="figure/ESRT_model.svg"/></span>
+
+Finally the architecture of our model 
+
+<span align="center"><img width="240" height="360" src="figure/changed_model.svg"/></span>
+
+From the above images it can be understood that our model looks close to ESRT, we added more convolutional layers in path2 for the model to learn minor features and gave a weightage parameter which can be learned for both paths
+
+We would still be training our model similar to SR-GAN, which is first we train the model with L2 loss function and then followed by Perceptual loss with the help of a discriminator that was trained to find whether an image is a High-Resolution or a Super-Resolution image
+
+<!-- ## Table of contents
 
 - [SRGAN-PyTorch](#srgan-pytorch)
     - [Overview](#overview)
@@ -23,9 +42,9 @@ of [Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial
     - [Result](#result)
     - [Contributing](#contributing)
     - [Credit](#credit)
-        - [Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network](#photo-realistic-single-image-super-resolution-using-a-generative-adversarial-network)
+        - [Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network](#photo-realistic-single-image-super-resolution-using-a-generative-adversarial-network) -->
 
-## Download weights
+<!-- ## Download weights
 
 Download all available model weights.
 
@@ -36,7 +55,7 @@ $ bash ./scripts/download_weights.sh SRGAN_x4-SRGAN_ImageNet
 $ bash ./scripts/download_weights.sh SRResNet_x4-SRGAN_ImageNet
 # Download `DiscriminatorForVGG_x4-SRGAN_ImageNet.pth.tar` weights to `./results/pretrained_models`
 $ bash ./scripts/download_weights.sh DiscriminatorForVGG_x4-SRGAN_ImageNet
-```
+``` -->
 
 ## Download datasets
 
@@ -64,19 +83,19 @@ If you need to test the effect of the model, download the test dataset.
 $ bash ./scripts/download_datasets.sh Set5
 ```
 
-### Test srgan_x4
+### Test ETGAN_x4
 
 ```shell
 $ python3 test.py --config_path ./configs/test/SRGAN_x4-SRGAN_ImageNet-Set5.yaml
 ```
 
-### Test srresnet_x4
+### Test ET_net_x4
 
 ```shell
 $ python3 test.py --config_path ./configs/test/SRResNet_x4-SRGAN_ImageNet-Set5.yaml
 ```
 
-### Train srresnet_x4
+### Train ET_net_x4
 
 First, the dataset image is split into several small images to reduce IO and keep the batch image size uniform.
 
@@ -90,7 +109,7 @@ Then, run the following commands to train the model
 $ python3 train_net.py --config_path ./configs/train/SRResNet_x4-SRGAN_ImageNet.yaml
 ```
 
-### Resume train srresnet_x4
+### Resume train ET_net_x4
 
 Modify the `./configs/train/SRResNet_x4-SRGAN_ImageNet.yaml` file.
 
@@ -100,13 +119,13 @@ Modify the `./configs/train/SRResNet_x4-SRGAN_ImageNet.yaml` file.
 $ python3 train_net.py --config_path ./configs/train/SRResNet_x4-SRGAN_ImageNet.yaml
 ```
 
-### Train srgan_x4
+### Train ETGAN_x4
 
 ```shell
 $ python3 train_gan.py --config_path ./configs/train/SRGAN_x4-SRGAN_ImageNet.yaml
 ```
 
-### Resume train srgan_x4
+### Resume train ETGAN_x4
 
 Modify the `./configs/train/SRGAN_x4-SRGAN_ImageNet.yaml` file.
 
@@ -153,11 +172,11 @@ Output:
 
 <span align="center"><img width="240" height="360" src="figure/sr_comic.png"/></span>
 
-```text
+<!-- ```text
 Build `srresnet_x4` model successfully.
 Load `srresnet_x4` model weights `SRGAN-PyTorch/results/pretrained_models/SRGAN_x4-SRGAN_ImageNet.pth.tar` successfully.
 SR image save to `./figure/sr_comic.png`
-```
+``` -->
 
 ## Contributing
 
@@ -172,7 +191,7 @@ I look forward to seeing what the community does with these models!
 _Christian Ledig, Lucas Theis, Ferenc Huszar, Jose Caballero, Andrew Cunningham, Alejandro Acosta, Andrew Aitken, Alykhan Tejani, Johannes Totz, Zehan
 Wang, Wenzhe Shi_ <br>
 
-**Abstract** <br>
+<!-- **Abstract** <br>
 Despite the breakthroughs in accuracy and speed of single image super-resolution using faster and deeper convolutional neural networks, one central
 problem remains largely unsolved: how do we recover the finer texture details when we super-resolve at large upscaling factors? The behavior of
 optimization-based super-resolution methods is principally driven by the choice of the objective function. Recent work has largely focused on
@@ -184,9 +203,12 @@ adversarial loss and a content loss. The adversarial loss pushes our solution to
 trained to differentiate between the super-resolved images and original photo-realistic images. In addition, we use a content loss motivated by
 perceptual similarity instead of similarity in pixel space. Our deep residual network is able to recover photo-realistic textures from heavily
 downsampled images on public benchmarks. An extensive mean-opinion-score (MOS) test shows hugely significant gains in perceptual quality using SRGAN.
-The MOS scores obtained with SRGAN are closer to those of the original high-resolution images than to those obtained with any state-of-the-art method.
+The MOS scores obtained with SRGAN are closer to those of the original high-resolution images than to those obtained with any state-of-the-art method. -->
 
 [[Paper]](https://arxiv.org/pdf/1609.04802v5.pdf)
+[[Paper]](https://arxiv.org/pdf/2108.11084.pdf)
+
+Note: this Repo is hugely benifits from https://github.com/Lornatang/SRGAN-PyTorch and https://github.com/louisfghbvc/Efficient-Transformer-for-Single-Image-Super-Resolution
 
 ```bibtex
 @InProceedings{srgan,
