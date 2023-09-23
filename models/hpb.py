@@ -9,6 +9,7 @@ from .hfm  import HFM
 from .comm import defaultConv,SELayer
 
 class HPB(nn.Module):
+    """This is the HPB block from ESRT paper"""
     def __init__(self, inChannel, outChannel, reScale):
         super().__init__()
         self.hfm = HFM()
@@ -38,6 +39,7 @@ class HPB(nn.Module):
         
 
 class Config():
+    """This class is used to give the weightage parameters for each branch"""
     lamRes = torch.nn.Parameter(torch.ones(1))
     lamX = torch.nn.Parameter(torch.ones(1))
 

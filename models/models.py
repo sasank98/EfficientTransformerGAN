@@ -8,6 +8,9 @@ from .debug import PrintLayer
 
 
 class BackBoneBlock(nn.Module):
+
+    """This module helps in repeating a certain module multiple times"""
+
     def __init__(self, num, fm, **args):
         super().__init__()
         self.arr = nn.ModuleList([])
@@ -21,6 +24,9 @@ class BackBoneBlock(nn.Module):
 
 
 class ESRT(nn.Module):
+
+    """The Model implemented according to the ESRT Paper"""
+
     def __init__(self, hiddenDim=32, mlpDim=128, scaleFactor=2):
         super().__init__()
         self.conv3 = nn.Conv2d(3, hiddenDim,
