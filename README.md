@@ -1,8 +1,10 @@
 # Efficient Transformer GAN
 
+Travel Dates: 01
+
 Team members: Ajaysriram Muthuraman & Sasank Potluri, Date: 09/22/2023, CS 7180 Advanced Perception
 
-Travel Dates: 01
+
 
 ## Overview
 
@@ -72,6 +74,24 @@ It is convenient to download some commonly used test data sets here.
 ```shell
 $ bash ./scripts/download_datasets.sh Set5
 ```
+
+## Install Dependencies
+
+We will be training and testing the model in a conda virtual environment
+
+```shell
+$ bash conda create -n [YOUR_ENV_NAME]
+```
+Install the dependencies using the Yaml File
+
+```shell
+$ bash conda install -f TrGAN_requirements.yaml
+```
+
+It is convenient to download some commonly used test data sets here.
+
+```shell
+$ bash ./scripts/download_datasets.sh Set5
 
 ## How Test and Train
 
