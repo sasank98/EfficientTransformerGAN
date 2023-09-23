@@ -235,7 +235,7 @@ def build_model(
     #                                                        out_channels=config["MODEL"]["G"]["OUT_CHANNELS"],
     #                                                        channels=config["MODEL"]["G"]["CHANNELS"],
     #                                                        num_rcb=config["MODEL"]["G"]["NUM_RCB"])
-    
+    """Builds the ETGAN Model according to the scale required"""
     g_model = ETGAN(mlpDim=128,scaleFactor=config["SCALE"])
 
     d_model = model.__dict__[config["MODEL"]["D"]["NAME"]](in_channels=config["MODEL"]["D"]["IN_CHANNELS"],
@@ -266,6 +266,9 @@ def build_model(
 
 
 def define_loss(config: Any, device: torch.device) -> [nn.MSELoss, model.ContentLoss, nn.BCEWithLogitsLoss]:
+
+    """Builds the Loss function with hyper-parameters and passes down the function"""
+
     if config["TRAIN"]["LOSSES"]["PIXEL_LOSS"]["NAME"] == "MSELoss":
         pixel_criterion = nn.MSELoss()
     else:
@@ -297,6 +300,9 @@ def define_loss(config: Any, device: torch.device) -> [nn.MSELoss, model.Content
 
 
 def define_optimizer(g_model: nn.Module, d_model: nn.Module, config: Any) -> [optim.Adam, optim.Adam]:
+
+    """Builds the optimizer function with given hyper-parameters and passes down the optimizer"""
+
     if config["TRAIN"]["OPTIM"]["NAME"] == "Adam":
         g_optimizer = optim.Adam(g_model.parameters(),
                                  config["TRAIN"]["OPTIM"]["LR"],
@@ -316,6 +322,9 @@ def define_optimizer(g_model: nn.Module, d_model: nn.Module, config: Any) -> [op
 
 
 def define_scheduler(g_optimizer: optim.Adam, d_optimizer: optim.Adam, config: Any) -> [lr_scheduler.MultiStepLR, lr_scheduler.MultiStepLR]:
+    
+    """Defines a scheduler"""
+
     if config["TRAIN"]["LR_SCHEDULER"]["NAME"] == "MultiStepLR":
         g_scheduler = lr_scheduler.MultiStepLR(g_optimizer,
                                                config["TRAIN"]["LR_SCHEDULER"]["MILESTONES"],
@@ -346,6 +355,7 @@ def train(
         device: torch.device,
         config: Any,
 ) -> None:
+    """Defines the training loop and data to be logged while training"""
     # Calculate how many batches of data there are under a dataset iterator
     batches = len(train_data_prefetcher)
 

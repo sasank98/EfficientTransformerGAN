@@ -24,6 +24,7 @@ feature_extractor_net_cfgs: Dict[str, List[Union[str, int]]] = {
 
 
 def _make_layers(net_cfg_name: str, batch_norm: bool = False) -> nn.Sequential:
+    """Internal function that is over-written with this function for our use case"""
     net_cfg = feature_extractor_net_cfgs[net_cfg_name]
     layers: nn.Sequential[nn.Module] = nn.Sequential()
     in_channels = 3
@@ -101,6 +102,7 @@ class SRResNet(nn.Module):
             num_rcb: int = 16,
             upscale: int = 4,
     ) -> None:
+        """SRResNet Module"""
         super(SRResNet, self).__init__()
         # Low frequency information extraction layer
         self.conv1 = nn.Sequential(
@@ -159,6 +161,7 @@ class SRResNet(nn.Module):
 
 
 class DiscriminatorForVGG(nn.Module):
+    """Discriminator model used for training the Efficient Transformer"""
     def __init__(
             self,
             in_channels: int = 3,
@@ -215,6 +218,7 @@ class DiscriminatorForVGG(nn.Module):
 
 
 class _ResidualConvBlock(nn.Module):
+    """Residual module to be repeated multiple times used in ResNet architecture"""
     def __init__(self, channels: int) -> None:
         super(_ResidualConvBlock, self).__init__()
         self.rcb = nn.Sequential(
@@ -236,6 +240,7 @@ class _ResidualConvBlock(nn.Module):
 
 
 class _UpsampleBlock(nn.Module):
+    """Upsample module to increase the size of the image by a given scale"""
     def __init__(self, channels: int, upscale_factor: int) -> None:
         super(_UpsampleBlock, self).__init__()
         self.upsample_block = nn.Sequential(

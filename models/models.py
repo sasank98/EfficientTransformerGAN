@@ -54,6 +54,7 @@ class ESRT(nn.Module):
     
 
 class ETGAN(nn.Module):
+    """The Model we constructed as an improvement from its predecessors"""
     def __init__(self, hiddenDim=32, mlpDim=128, scaleFactor=2):
         super().__init__()
         self.conv3 = nn.Conv2d(3, hiddenDim,

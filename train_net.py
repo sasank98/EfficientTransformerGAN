@@ -194,7 +194,7 @@ def build_model(
     #                                                        out_channels=config["MODEL"]["G"]["OUT_CHANNELS"],
     #                                                        channels=config["MODEL"]["G"]["CHANNELS"],
     #                                                        num_rcb=config["MODEL"]["G"]["NUM_RCB"])
-    
+    """Build the Transformer model""" 
     g_model = ETGAN(mlpDim=128,scaleFactor=config["SCALE"])
     g_model = g_model.to(device)
 
@@ -217,6 +217,7 @@ def build_model(
 
 
 def define_loss(config: Any, device: torch.device) -> nn.MSELoss:
+    """Defines the loss object and passes it down"""
     if config["TRAIN"]["LOSSES"]["PIXEL_LOSS"]["NAME"] == "MSELoss":
         pixel_criterion = nn.MSELoss()
     else:
@@ -227,6 +228,8 @@ def define_loss(config: Any, device: torch.device) -> nn.MSELoss:
 
 
 def define_optimizer(g_model: nn.Module, config: Any) -> optim.Adam:
+    """Builds the optimizers hyper-parameters and passes down the optimizer"""
+
     if config["TRAIN"]["OPTIM"]["NAME"] == "Adam":
         optimizer = optim.Adam(g_model.parameters(),
                                config["TRAIN"]["OPTIM"]["LR"],
@@ -251,6 +254,7 @@ def train(
         device: torch.device,
         config: Any,
 ) -> None:
+    """Trains the model"""
     # Calculate how many batches of data are in each Epoch
     batches = len(train_data_prefetcher)
     # Print information of progress bar during training

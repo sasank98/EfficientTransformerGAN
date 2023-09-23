@@ -21,6 +21,7 @@ from utils import build_iqa_model, load_pretrained_state_dict, make_directory, A
 
 def load_dataset(config: Any, device: torch.device):
     # -> CUDAPrefetcher
+    """Loads the Dataset for test"""
     test_datasets = PairedImageDataset(config["TEST"]["DATASET"]["PAIRED_TEST_GT_IMAGES_DIR"],
                                        config["TEST"]["DATASET"]["PAIRED_TEST_LR_IMAGES_DIR"])
     test_dataloader = DataLoader(test_datasets,
@@ -45,6 +46,8 @@ def build_model(config: Any, device: torch.device):
     #                                                        channels=config["MODEL"]["G"]["CHANNELS"],
     #                                                        num_rcb=config["MODEL"]["G"]["NUM_RCB"])
     
+    """Builds the model to be tested"""
+
     g_model = ETGAN(mlpDim=128,scaleFactor=config["SCALE"])
     g_model = g_model.to(device)
 
@@ -63,6 +66,9 @@ def test(
         device: torch.device,
         config: Any,
 ) -> [float, float]:
+    
+    """Tests the model"""
+
     save_image = False
     save_image_dir = ""
 
@@ -147,6 +153,8 @@ def test(
 
 def main() -> None:
     # Read parameters from configuration file
+    """Function required when running the file individually"""
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--config_path",
                         type=str,
