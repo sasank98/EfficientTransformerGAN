@@ -1,5 +1,7 @@
 # Efficient Transformer GAN
-Team members: Ajaysriram Muthuraman & Sasank Potluri
+
+Team members: Ajaysriram Muthuraman & Sasank Potluri, Date: 09/22/2023, CS 7180 Advanced Perception
+
 Travel Dates: 01
 
 ## Overview
@@ -143,12 +145,12 @@ Source of original paper results: [https://arxiv.org/pdf/1609.04802v5.pdf](https
 
 In the following table, the psnr value in `()` indicates the result of the project, and `-` indicates no test.
 
-| Set5 | Scale |      SRResNet      |       SRGAN        |
+| Set5 | Scale |      EffTrNet      |       ETGAN        |
 |:----:|:-----:|:------------------:|:------------------:|
-| PSNR |   4   |  32.05(**32.16**)  |  29.40(**30.67**)  |
-| SSIM |   4   | 0.9019(**0.8938**) | 0.8472(**0.8627**) |
+| PSNR |   4   |  8.940(**9.340**)  |    8.39(**8.62**)  |
+| SSIM |   4   | 0.0182(**0.0210**) | 0.0138(**0.0152**) |
 
-| Set14 | Scale |      SRResNet      |       SRGAN        |
+<!-- | Set14 | Scale |      SRResNet      |       SRGAN        |
 |:-----:|:-----:|:------------------:|:------------------:|
 | PSNR  |   4   |  28.49(**28.57**)  |  26.02(**27.12**)  |
 | SSIM  |   4   | 0.8184(**0.7815**) | 0.7397(**0.7321**) |
@@ -156,7 +158,7 @@ In the following table, the psnr value in `()` indicates the result of the proje
 | BSD100 | Scale |      SRResNet      |       SRGAN        |
 |:------:|:-----:|:------------------:|:------------------:|
 |  PSNR  |   4   |  27.58(**27.56**)  |  25.16(**26.22**)  |
-|  SSIM  |   4   | 0.7620(**0.7367**) | 0.6688(**0.6867**) |
+|  SSIM  |   4   | 0.7620(**0.7367**) | 0.6688(**0.6867**) | -->
 
 ```bash
 # If you do not train the model yourself, you can download the model weights and test them.

@@ -1,3 +1,4 @@
+# Ajaysriram Muthuraman & Sasank Potluri, Date: 09/22/2023, CS 7180 Advanced Perception
 # experiment name
 EXP_NAME: SRResNet_x4-SRGAN_ImageNet-Set5
 # random number seed
@@ -7,7 +8,7 @@ SCALE: 4
 # run device model
 DEVICE_ID: 0
 # Model weights path
-MODEL_WEIGHTS_PATH: "./results/pretrained_models/SRResNet_x4-SRGAN_ImageNet.pth.tar"
+MODEL_WEIGHTS_PATH: "./results/EfficientTransformer_model.pth"
 
 # Model define
 MODEL:

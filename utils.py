@@ -1,16 +1,5 @@
-# Copyright 2022 Dakewe Biotech Corporation. All Rights Reserved.
-# Licensed under the Apache License, Version 2.0 (the "License");
-#   you may not use this file except in compliance with the License.
-#   You may obtain a copy of the License at
-#
-#       http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-# ==============================================================================
+# Ajaysriram Muthuraman & Sasank Potluri, Date: 09/22/2023, CS 7180 Advanced Perception
+
 import os
 import shutil
 from collections import OrderedDict
@@ -169,6 +158,7 @@ def load_resume_state_dict(
 
 
 def make_directory(dir_path: str) -> None:
+    """Makes a directory for a given path"""
     if not os.path.exists(dir_path):
         os.makedirs(dir_path)
 
@@ -183,6 +173,7 @@ def save_checkpoint(
         is_best: bool = False,
         is_last: bool = False,
 ) -> None:
+    """Saves checkpoint of the model at a given path"""
     checkpoint_path = os.path.join(samples_dir, file_name)
     torch.save(state_dict, checkpoint_path)
 
@@ -250,6 +241,7 @@ class AverageMeter(object):
 
 
 class ProgressMeter(object):
+    
     def __init__(self, num_batches, meters, prefix=""):
         self.batch_fmtstr = self._get_batch_fmtstr(num_batches)
         self.meters = meters

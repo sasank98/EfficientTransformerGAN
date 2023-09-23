@@ -1,3 +1,5 @@
+# Ajaysriram Muthuraman & Sasank Potluri, Date: 09/22/2023, CS 7180 Advanced Perception
+
 import torch
 import torch.nn as nn
 from .debug import PrintLayer
